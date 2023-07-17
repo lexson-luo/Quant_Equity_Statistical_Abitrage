@@ -20,30 +20,27 @@ def prep_data(tickers):
     data_sprd['mean_sprd'] = data_sprd['Close'].rolling(506, center=False).mean()
     data_sprd['stdv_sprd'] = data_sprd['Close'].rolling(506, center=False).std()
 
-    # data_sprd['mean_sprd'] = data_sprd['Close'][:506].mean()
-    # data_sprd['stdv_sprd'] = data_sprd['Close'][:506].std()
-
     data_sprd = data_sprd.iloc[505:, :]
 
     return data_sprd
 
 
 params = [
-          # (3.0, 4.0, 0.1, 45),  # 'CLF', 'X'
-          # (2.5, 3.5, 0.1, 30),  # 'IEX', 'ITW'
-          # (1.5, 2.5, 0.1, 55),  # 'CDNS', 'SNPS'
-          # (1.5, 2.5, 0.1, 35),  # 'EL', 'ETN'
-          # (2.5, 3.0, 0.1, 35),  # 'AME', 'NSC'
-          # (2.5, 3.0, 0.1, 50),  # 'SLB', 'SLG'
-          # (2.0, 2.5, 0.1, 60),  # 'AN', 'URI'
-          # (1.5, 2.0, 0.1, 30),  # 'BXP', 'KMI'
-          # (1.5, 2.5, 0.6, 35),  # 'AVB', 'UDR'
-          # (2.5, 3.0, 0.1, 30),  # 'ELV', 'UNH'
-          # (1.0, 2.0, 0.4, 50),  # 'CMA', 'FITB'
-          # (2.5, 3.0, 0.1, 30),  # 'BA', 'UAL'
-          # (1.5, 2.0, 0.1, 60),  # 'NCR', 'PVH'
-          # (1.5, 2.0, 0.6, 30),  # 'UNM', 'VTR'
-          # (1.5, 2.5, 0.1, 30),  # 'FRT', 'REG'
+          (3.0, 4.0, 0.1, 45),  # 'CLF', 'X'
+          (2.5, 3.5, 0.1, 30),  # 'IEX', 'ITW'
+          (1.5, 2.5, 0.1, 55),  # 'CDNS', 'SNPS'
+          (1.5, 2.5, 0.1, 35),  # 'EL', 'ETN'
+          (2.5, 3.0, 0.1, 35),  # 'AME', 'NSC'
+          (2.5, 3.0, 0.1, 50),  # 'SLB', 'SLG'
+          (2.0, 2.5, 0.1, 60),  # 'AN', 'URI'
+          (1.5, 2.0, 0.1, 30),  # 'BXP', 'KMI'
+          (1.5, 2.5, 0.6, 35),  # 'AVB', 'UDR'
+          (2.5, 3.0, 0.1, 30),  # 'ELV', 'UNH'
+          (1.0, 2.0, 0.4, 50),  # 'CMA', 'FITB'
+          (2.5, 3.0, 0.1, 30),  # 'BA', 'UAL'
+          (1.5, 2.0, 0.1, 60),  # 'NCR', 'PVH'
+          (1.5, 2.0, 0.6, 30),  # 'UNM', 'VTR'
+          (1.5, 2.5, 0.1, 30),  # 'FRT', 'REG'
           (3.0, 3.5, 0.1, 30),  # 'L', 'USB'
           ]
 
@@ -80,21 +77,21 @@ for i in range(len(params)):
 
 
     pairs = [
-        # ('CLF', 'X'),
-        # ('IEX', 'ITW'),
-        # ('CDNS', 'SNPS'),
-        # ('EL', 'ETN'),
-        # ('AME', 'NSC'),
-        # ('SLB', 'SLG'),
-        # ('AN', 'URI'),
-        # ('BXP', 'KMI'),
-        # ('AVB', 'UDR'),
-        # ('ELV', 'UNH'),
-        # ('CMA', 'FITB'),
-        # ('BA', 'UAL'),
-        # ('NCR', 'PVH'),
-        # ('UNM', 'VTR'),
-        # ('FRT', 'REG'),
+        ('CLF', 'X'),
+        ('IEX', 'ITW'),
+        ('CDNS', 'SNPS'),
+        ('EL', 'ETN'),
+        ('AME', 'NSC'),
+        ('SLB', 'SLG'),
+        ('AN', 'URI'),
+        ('BXP', 'KMI'),
+        ('AVB', 'UDR'),
+        ('ELV', 'UNH'),
+        ('CMA', 'FITB'),
+        ('BA', 'UAL'),
+        ('NCR', 'PVH'),
+        ('UNM', 'VTR'),
+        ('FRT', 'REG'),
         ('L', 'USB')
     ]
 
@@ -107,6 +104,7 @@ for i in range(len(params)):
     stats = bt.run()
     print(stats)
 
+    ###########################################Optimization Code Block#######################################
     # opt = bt.optimize(nstdv=list(np.arange(1.0, 4.5, 0.5)),
     #                   stop_loss=list(np.arange(2.0, 5.5, 0.5)),
     #                   constraint=lambda x: x.nstdv < x.stop_loss,
@@ -117,6 +115,7 @@ for i in range(len(params)):
     # opt_params = opt._strategy
     # print(opt_params)
     # print(opt)
+    #########################################################################################################
 
     returns_stream = stats._equity_curve
     column = str(pairs[i][0]) + "_" + str(pairs[i][1])
