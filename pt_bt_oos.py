@@ -102,7 +102,7 @@ for i in range(len(params)):
 
     dataf = prep_data(pairs[i])
 
-    bt = Backtest(dataf, PairsTradingStrategy, commission=.002, cash=(aum / 15), trade_on_close=True)
+    bt = Backtest(dataf, PairsTradingStrategy, commission=.002, cash=(aum / len(pairs)), trade_on_close=True)
 
     stats = bt.run()
     print(stats)
